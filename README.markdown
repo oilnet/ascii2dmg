@@ -35,5 +35,6 @@ Arabic  DMG  ASCII-DMG
 ه       h     h
 و       w/ū   w/u-
 ي/ى     y/ī   y/i-
+~~~~~~~~~~~~~~~~~~~~~~
 
 For an actual hiven ("-"), a slash ("/") should be used. Uppercase letters are supported as well but left out of the above table for brevity. To give an example: بسم الله الرحمن الرحيم is transliterated into DMG as bismi-llāhi r-raḥmāni r-raḥīm and would be written [[bismi/lla-hi r-rah.ma-ni r-rah.i-m]].
