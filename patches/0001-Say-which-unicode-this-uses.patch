@@ -1,0 +1,25 @@
+From 7ea0bb2c84a86af6644e2bae3c0a5c526204c4bb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Matthias=20K=C3=BChlke?= <xxx@xxx.de>
+Date: Fri, 8 Jun 2012 19:16:24 +0200
+Subject: [PATCH] Say which unicode this uses.
+
+---
+ README.markdown |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/README.markdown b/README.markdown
+index 1323b00..1ab0caf 100644
+--- a/README.markdown
++++ b/README.markdown
+@@ -1,7 +1,7 @@
+ Synopsis and Usage
+ ==================
+ 
+-ascii2dmg takes a text file such as a [Markdown](http://daringfireball.net/projects/markdown/) file and replaces everything inside twin brackets "[[...]]" following a specific ASCII-only format of typing the DMG transliteration of Arabic with the actual Unicode characters that would have had to be used. The DMG transliteration standard is described in [DIN 31635](http://en.wikipedia.org/wiki/DIN_31635). ascii2dmg was born out of my habit of typing lecture notes on my mobile phone, where there is no chance of efficiently using the Unicode characters. If you use any of the more popular light markup formats you can first pipe your text through ascii2dmg and then [Pandoc](http://johnmacfarlane.net/pandoc/) to get an ODT, LaTeX, HTML or whatever you fancy.
++ascii2dmg takes a text file such as a [Markdown](http://daringfireball.net/projects/markdown/) file and replaces everything inside twin brackets "[[...]]" following a specific ASCII-only format of typing the DMG transliteration of Arabic with the actual Unicode (UTF-8) characters that would have had to be used. The DMG transliteration standard is described in [DIN 31635](http://en.wikipedia.org/wiki/DIN_31635). ascii2dmg was born out of my habit of typing lecture notes on my mobile phone, where there is no chance of efficiently using the Unicode characters. If you use any of the more popular light markup formats you can first pipe your text through ascii2dmg and then [Pandoc](http://johnmacfarlane.net/pandoc/) to get an ODT, LaTeX, HTML or whatever you fancy.
+ 
+ The DMG ASCII-only representation works as follows:
+ 
+-- 
+1.7.10.3
+
