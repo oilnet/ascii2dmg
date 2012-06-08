@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+require 'trollop'
+
+# The heart of the converter, changing the ASCII representation of a DMG character
+# with the actual Unicode symbol for that character. Thanks to irc.freenode.net#ruby's
+# bnagy for pointing out the usefulness of String#inject for this task.
+def decode_asciified_dmg(string)
+  changes = {
+    /\// => '-', 
+    /a\-/ => 'ā', /u\-/ => 'ū', /i\-/ => 'ī', 
+    /A\-/ => 'Ā', /U\-/ => 'Ū', /I\-/ => 'Ī',
+    /t_/ => 'ṯ', /d_/ => 'ḏ',
+    /T_/ => 'Ṯ', /D_/ => 'Ḏ',
+    /h_/ => 'ḫ',
+    /H_/ => 'Ḫ',
+    /h\./ => 'ḥ', /s\./ => 'ṣ', /d\./ => 'ḍ', /t\./ => 'ṭ', /z\./ => 'ẓ',
+    /H\./ => 'Ḥ', /S\./ => 'Ṣ', /D\./ => 'Ḍ', /T\./ => 'Ṭ', /Z\./ => 'Ẓ',
+    /g\^/ => 'ǧ', /s\^/ => 'š',
+    /G\^/ => 'Ǧ', /S\^/ => 'Š',
+    /g\./ => 'ġ',
+    /G\./ => 'Ġ',
+    /\(/ => 'ʿ',
+    /\)/ => 'ʾ',
+  }
+  return changes.inject(string) {|string, (pattern, replacement)| string.gsub(pattern, replacement)}
+end
+
+class String
+  # Thanks to irc.freenode.net#ruby's Defusal who 
+  # knew that .gsub can be handed a block instead
+  # of a string.
+  def to_dmg(circumfix = nil)
+    return self.gsub(/\[\[(.*?)\]\]/) {"#{circumfix}#{$1._to_dmg}#{circumfix}"}
+  end
+  
+  protected
+
+  def _to_dmg
+    return decode_asciified_dmg(self)
+  end
+end
+
+def run
+  opts = Trollop::options do
+    version "ascii2dmg 0.1 (c) 2012 Jonathan R. Schmid <jrs-spam@weitnahbei.de>"
+    banner  "Usage:\n\tascii2dmg [options] [<input file>] [<output file>]\n\tFor file names not given, stdin/stdout are assumed."
+    opt :no_circumfix, "Don't put underscores around the substituted DMG transliterations."
+    opt :circumfix, "Use a custom character (not an underscore) to put around the substituted DMG transliterations.", :default => '_'
+  end
+  circumfix = opts[:no_circumfix] ? nil : opts[:circumfix]
+  outfile   = ARGV.pop if ARGV.length == 2
+  output    = ARGF.read.to_dmg(circumfix)
+  if outfile
+    File.open(outfile, 'w') {|file| file.write(output)}
+  else
+    puts output
+  end
+end; run
