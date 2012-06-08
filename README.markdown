@@ -5,36 +5,36 @@ ascii2dmg takes a text file such as a [Markdown](http://daringfireball.net/proje
 
 The DMG ASCII-only representation works as follows:
 
-Arabic  DMG  ASCII-DMG
-~~~~~~~~~~~~~~~~~~~~~~
-ء/ا     ʾ/ā   )/a-
-ب       b     b
-ت       t     t
-ث       ṯ     t_
-ج       ǧ     g^
-ح       ḥ     h.
-خ       ḫ     h_
-د       d     d
-ذ       ḏ     d_
-ر       r     r
-ز       z     z
-س       s     s
-ش       š     s^
-ص       ṣ     s.
-ض       ḍ     d.
-ط       ṭ     t.
-ظ       ẓ     z.
-ع       ʿ     (
-غ       ġ     g.
-ف       f     f
-ق       q     q
-ك       k     k
-ل       l     l
-م       m     m
-ن       n     n
-ه       h     h
-و       w/ū   w/u-
-ي/ى     y/ī   y/i-
+~~~~~~~~~~~~~~~~~~~~~~~
+Arabic  DMG   ASCII-DMG
+ء/ا     ʾ/ā     )/a-
+ب       b       b
+ت       t       t
+ث       ṯ       t_
+ج       ǧ       g^
+ح       ḥ       h.
+خ       ḫ       h_
+د       d       d
+ذ       ḏ       d_
+ر       r       r
+ز       z       z
+س       s       s
+ش       š       s^
+ص       ṣ       s.
+ض       ḍ       d.
+ط       ṭ       t.
+ظ       ẓ       z.
+ع       ʿ       (
+غ       ġ       g.
+ف       f       f
+ق       q       q
+ك       k       k
+ل       l       l
+م       m       m
+ن       n       n
+ه       h       h
+و       w/ū     w/u-
+ي/ى     y/ī     y/i-
 ~~~~~~~~~~~~~~~~~~~~~~
 
 For an actual hiven ("-"), a slash ("/") should be used. Uppercase letters are supported as well but left out of the above table for brevity. To give an example: بسم الله الرحمن الرحيم is transliterated into DMG as bismi-llāhi r-raḥmāni r-raḥīm and would be written [[bismi/lla-hi r-rah.ma-ni r-rah.i-m]].
