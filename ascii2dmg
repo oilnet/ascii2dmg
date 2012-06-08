@@ -7,21 +7,28 @@ require 'trollop'
 # bnagy for pointing out the usefulness of String#inject for this task.
 def decode_asciified_dmg(string)
   changes = {
-    /\// => '-', 
-    /a\-/ => 'ā', /u\-/ => 'ū', /i\-/ => 'ī', 
+    # Combining macron above (U+304)
+    /a\-/ => 'ā', /u\-/ => 'ū', /i\-/ => 'ī',
     /A\-/ => 'Ā', /U\-/ => 'Ū', /I\-/ => 'Ī',
-    /t_/ => 'ṯ', /d_/ => 'ḏ',
-    /T_/ => 'Ṯ', /D_/ => 'Ḏ',
-    /h_/ => 'ḫ',
-    /H_/ => 'Ḫ',
-    /h\./ => 'ḥ', /s\./ => 'ṣ', /d\./ => 'ḍ', /t\./ => 'ṭ', /z\./ => 'ẓ',
-    /H\./ => 'Ḥ', /S\./ => 'Ṣ', /D\./ => 'Ḍ', /T\./ => 'Ṭ', /Z\./ => 'Ẓ',
-    /g\^/ => 'ǧ', /s\^/ => 'š',
-    /G\^/ => 'Ǧ', /S\^/ => 'Š',
-    /g\./ => 'ġ',
-    /G\./ => 'Ġ',
+    # Combining macron below (U+0331)
+    /t_/ => 'ṯ', /d_/ => 'ḏ',
+    /T_/ => 'Ṯ', /D_/ => 'Ḏ',
+    # Combining breve below (U+032E)
+    /h_/ => 'ḫ',
+    /H_/ => 'Ḫ',
+    # Combining dot above (U+0307)
+    /g\./ => 'ġ',
+    /G\./ => 'Ġ',
+    # Combining dot below (U+0323))
+    /h\./ => 'ḥ', /s\./ => 'ṣ', /d\./ => 'ḍ', /t\./ => 'ṭ', /z\./ => 'ẓ',
+    /H\./ => 'Ḥ', /S\./ => 'Ṣ', /D\./ => 'Ḍ', /T\./ => 'Ṭ', /Z\./ => 'Ẓ',
+    # Combining caron above (U+030C)
+    /g\^/ => 'ǧ', /s\^/ => 'š',
+    /G\^/ => 'Ǧ', /S\^/ => 'Š',
+    # Non-combining characters, namely, ء, ع and the hiven.
     /\(/ => 'ʿ',
     /\)/ => 'ʾ',
+    /\// => '-'
   }
   return changes.inject(string) {|string, (pattern, replacement)| string.gsub(pattern, replacement)}
 end
@@ -50,7 +57,7 @@ def run
   end
   circumfix = opts[:no_circumfix] ? nil : opts[:circumfix]
   outfile   = ARGV.pop if ARGV.length == 2
-  output    = ARGF.read.to_dmg(circumfix)
+  output    = ARGF.read.to_dmg(circumfix).gsub(/(\-|\=)\>/, '→') # U+2192
   if outfile
     File.open(outfile, 'w') {|file| file.write(output)}
   else
